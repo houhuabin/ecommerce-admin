@@ -54,10 +54,7 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("Unauthenticated", { status: 401 });
-    }
+    console.log("get start...", params.storeId);
 
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
@@ -68,6 +65,7 @@ export async function GET(
         storeId: params.storeId,
       },
     });
+
     return NextResponse.json(billboards);
   } catch (error) {
     console.log("[BILLBOARDS_GET]", error);
